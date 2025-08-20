@@ -1,47 +1,40 @@
 import java.net.InetAddress;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
+
 public class random {
-    static int[] union(int[]arr1, int[]arr2){
-        HashSet<Integer> set = new HashSet<>();
-        for (int i = 0; i < arr1.length; i++) {
-            set.add(arr1[i]);
-        }
-        for (int i = 0; i < arr2.length; i++) {
-            set.add(arr2[i]);
-        }
-        int[] ans = new int[set.size()];
-        int index = 0;
-        for(int el : set){
-            ans[index++] = el;
-        }
-        return ans;
-
-    }
-    static int[] rearrange_El(int[] arr){
-        int n = arr.length;
-        int[] result = new int[n];
-        int positive_Index = 0;
-        int negative_Index = 1;
-
-        for (int i = 0; i < n; i++) {
-            if(arr[i] > 0){ // Positive
-                result[positive_Index] = arr[i];
-                positive_Index += 2;
-            } else {
-                result[negative_Index] = arr[i];
-                negative_Index += 2;
-            }
-        }
-        return result;
-    }
+   static void maze4direction(String p , boolean[][] isvisited,int row,int col){
+       if(row == isvisited.length-1 && col == isvisited[0].length-1){
+           System.out.println(p);
+           return;
+       }
+       if(!isvisited[row][col]) return;
+       isvisited[row][col] = false;
+       if(row < isvisited.length-1){
+           maze4direction("D"+p,isvisited,row+1,col);
+       }
+       if(col < isvisited[0].length-1){
+           maze4direction("R"+p,isvisited,row,col+1);
+       }
+       if(row > 1){
+           maze4direction("L"+p,isvisited,row-1,col);
+       }
+       if(col > 1){
+           maze4direction("U"+p,isvisited,row,col-1);
+       }
+       isvisited[row][col] = true;
+   }
     public static void main(String[] args) {
-        try {
-            InetAddress localhost = InetAddress.getLocalHost();
-            System.out.println("local host name :" + localhost.getHostName());
-            System.out.println("local host address :" + localhost.getHostAddress());
-         } catch (Exception c ){
-            c.printStackTrace();
-        }
-     }
+           boolean[][] isVisited = {
+                   {true,true,true},
+                   {true,true,true},
+                   {true,true,true},
+
+           };
+        maze4direction("",isVisited,0,0);
+    }
+
+
 }

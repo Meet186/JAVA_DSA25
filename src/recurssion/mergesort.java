@@ -44,7 +44,7 @@ public class mergesort {
             return arr;
         }
         int mid = arr.length/2;
-        int[] left = mergeSort(Arrays.copyOfRange(arr,0,mid));
+        int[] left = mergeSort(Arrays.copyOfRange(arr,0,mid)); // last index exclude
         int[] rigth = mergeSort(Arrays.copyOfRange(arr,mid,arr.length));
         return mergeArray(left,rigth);
 
