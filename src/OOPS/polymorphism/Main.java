@@ -11,6 +11,6 @@ public class Main {
         circle.area();
 
         Number obj = new Number();
-        System.out.println(obj.sum(4,5,8));
+        System.out.println(obj.sum(4, 5, 8));
     }
 }
