@@ -19,6 +19,10 @@ public class selfLL {
 
         }
 
+        public Node(int value, Node next) {
+            this.value = value;
+            this.next = next;
+        }
     }
 
     public int getTail(){
@@ -33,6 +37,22 @@ public class selfLL {
             tail = head;
         }
         size++;
+    }
+
+    // insert with resurssion
+    private Node insertRec(int val,int index,Node node){
+        if(index == 0){
+            Node temp = new Node(val);
+            size++;
+            return temp;
+        }
+
+        node.next = insertRec(val,index-1,node.next);
+        return node;
+    }
+
+    public void insertRec(int val,int index){
+        head = insertRec(val,index,head);
     }
 
     public void insertAtLast(int val){
