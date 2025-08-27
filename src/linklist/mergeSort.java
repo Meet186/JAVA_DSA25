@@ -21,15 +21,18 @@ public class mergeSort {
     }
 
     public ListNode middleNode(ListNode head) {
-        ListNode midprev = null;
-        while (head != null && head.next != null){
-            midprev = (midprev == null) ? head : midprev.next;
-            head = head.next.next;
-        }
-        ListNode mid = midprev.next;
-        midprev.next = null;
-        return  mid;
+       ListNode prev = null;
+       ListNode slow = head;
+       ListNode fast = head;
 
+       while (fast != null && fast.next != null){
+           prev = slow;
+           slow = slow.next;
+           fast = fast.next.next;
+
+       }
+       prev.next = null;
+       return slow;
     }
 
     public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
