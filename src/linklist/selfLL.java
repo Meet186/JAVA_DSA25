@@ -126,6 +126,14 @@ public class selfLL {
         System.out.println();
     }
 
+    public void displayreveres(Node head ){
+        Node temp = new Node();
+        temp = head;
+        if(head == null) return;
+        displayreveres(temp.next);
+        System.out.println(temp.value);
+    }
+
 
 
 

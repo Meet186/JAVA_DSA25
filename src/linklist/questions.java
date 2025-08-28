@@ -293,7 +293,89 @@ public class questions {
 
     }
 
+    //https://leetcode.com/problems/reverse-linked-list-ii/
+    public ListNode reverseBetween(ListNode head, int left, int right) {
+        if(head == null || left == right){
+            return head;
+        }
+        ListNode prev = null;
+        ListNode current = head;
+
+        for (int i = 0; current != null &&  i < left-1; i++) {
+            prev = current;
+            current = current.next;
+
+        }
+
+        ListNode newStart = prev;
+        ListNode changeStart = current;
+        prev = null;
+
+        for (int i = 0; current != null &&  i < (right-left + 1); i++) {
+            ListNode after = new ListNode();
+            after = current.next;
+            current.next = prev;
+            prev = current;
+            current = after;
+        }
+
+        if (newStart != null) {
+            newStart.next = prev;   // connect first part
+        } else {
+            head = prev;            // new head when left == 1
+        }
+        changeStart.next = current;
+
+       return head;
+
+    }
+
+    //http://leetcode.com/problems/reorder-list/
+    public void reorderList(ListNode head) {
+         if(head == null && head.next == null) return;
+         ListNode mid = middleNode(head);
+         ListNode hs = reverseList(mid);
+         ListNode hf = head;
+         // rearrange
+        while (hf != null && hs != null){
+            ListNode temp = hf.next;
+            hf.next = hs;
+            hf = temp;
+            temp = hs.next;
+            hs.next = hf;
+            hs = temp;
+        }
+        if(hf != null){
+            hf.next = null;
+        }
+    }
+
+    //https://leetcode.com/problems/rotate-list/
+    public ListNode rotateRight(ListNode head, int k) {
+        if(k < 0 || head == null || head.next == null){
+            return head;
+        }
+        int length = 1;
+        ListNode last = head;
+        while (last.next != null){
+            last = last.next;
+            length++;
+        }
+        last.next = head; // connect the new head with skip nodes start
+        int rotation = k%length; // % because ignore repeated rounds
+        int skipNode = length - rotation;
+        ListNode newLastNode = head;
+        for (int i = 0; i < skipNode-1; i++) {
+            newLastNode = newLastNode.next;
+        }
+        head = newLastNode.next;
+        newLastNode.next = null;
+        return head;
+    }
+
+
     public static void main(String[] args) {
+
 
     }
 }
