@@ -1,4 +1,4 @@
-package stack;
+package stackandQueue;
 
 public class selfStack {
     // size of stack.
