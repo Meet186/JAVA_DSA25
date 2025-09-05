@@ -1,5 +1,5 @@
 package stackandQueue;
-
+import java.util.*;
 public class selfStack {
     // size of stack.
     private int arr [] = new int[100];
@@ -45,6 +45,12 @@ public class selfStack {
     public boolean isStackFull(){
         if(idx == arr.length) return true;
         return false;
+    }
+
+    public static void main(String[] args) {
+
+
+
     }
 
 }

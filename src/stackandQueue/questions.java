@@ -147,15 +147,12 @@ public class questions {
         Stack<Integer> st = new Stack<>();
         int[] ans = new int[arr.length];
         for (int i = 0; i < arr.length; i++) {
-            if(!st.isEmpty() && arr[st.peek()] < arr[i]){
+            if(!st.isEmpty() && arr[st.peek()] <= arr[i]){
                 st.pop();
             } else {
-                ans[i] = 1;
+                ans[i] = st.isEmpty() ? 1 : i - st.peek();
                 st.push(i);
             }
-
-            ans[i] = i-st.peek() + 1;
-            st.push(i);
         }
         return ans;
     }
