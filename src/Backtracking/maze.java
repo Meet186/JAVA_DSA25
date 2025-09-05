@@ -42,6 +42,7 @@ public class maze {
         return temp;
 
     }
+
     static ArrayList<String> pathreturnDiognal(String p, int r, int c){
         if(r == 1 && c == 1){
             ArrayList<String> list = new ArrayList<>();

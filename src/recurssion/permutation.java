@@ -29,7 +29,6 @@ public class permutation {
             String first = p.substring(0,i);
             String second = p.substring(i,p.length());
             temp.addAll( permutation2(first + ch + second,up.substring(1)));
-
         }
         return temp;
     }
