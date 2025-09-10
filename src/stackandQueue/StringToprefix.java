@@ -58,7 +58,6 @@ public class StringToprefix {
         return val.peek();
     }
     public static void main(String[] args) {
-        String str = "9-4+3*4/6";
-        System.out.println(convert(str));
+//        System.out.println(convert(str));
     }
 }
