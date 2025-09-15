@@ -21,17 +21,19 @@ public class pascleTraingle {
         }
     }
     public static void main(String[] args) {
-        int row  = 4;
-
-        for (int i = 0; i <=  row; i++) {
-            int value = 1;
-            for (int j = 0; j <= i; j++) {
-                System.out.print(value + " ");
-                value = value * (i-j) / (j + 1);
-            }
-
-            System.out.println();
-            
-        }
+//        int row  = 4;
+//
+//        for (int i = 0; i <=  row; i++) {
+//            int value = 1;
+//            for (int j = 0; j <= i; j++) {
+//                System.out.print(value + " ");
+//                value = value * (i-j) / (j + 1);
+//            }
+//
+//            System.out.println();
+//
+//        }
+        int[][] ans = pascleTraingle(20);
+        print(ans);
     }
 }

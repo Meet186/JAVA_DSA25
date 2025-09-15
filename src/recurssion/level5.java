@@ -80,8 +80,6 @@ public class level5 {
               isVisited[i] = false;
               temp.remove(temp.size()-1);
           }
-
-
         }
     }
     public static List<List<Integer>> subset(int[] arr){

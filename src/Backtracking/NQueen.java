@@ -27,7 +27,6 @@ public class NQueen {
             }
         }
     }
-
     private static boolean isSafe(char[][] board, int row, int col) {
         int n = board.length;
         for (int j = 0; j < n; j++) { // check entire East & West

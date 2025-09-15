@@ -27,7 +27,6 @@ public class Human implements Cloneable{
         twin.arr = new int[twin.arr.length];
         for (int i = 0; i < this.arr.length; i++) {
             twin.arr[i] = this.arr[i];
-
         }
 
         return twin;
