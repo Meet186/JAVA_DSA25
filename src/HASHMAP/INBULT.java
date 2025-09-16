@@ -1,5 +1,6 @@
 package HASHMAP;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,9 +14,28 @@ public class INBULT {
                 map.put(el,map.get(el) + 1);
             }
         }
+        int ans = 0;
+        int key = -1;
+        for(var el : map.entrySet()){
+            if(el.getValue() > ans){
+                ans = el.getValue();
+                key = el.getKey();
+            }
+        }
+        return key;
+    }
 
-        System.out.println(map);
-        return 1;
+    static int mostcomeELCount(int[] arr){
+        int[] freq = new int[10];
+        for (int i = 0; i < arr.length; i++) {
+            freq[arr[i]]++;
+        }
+        int max = 0;
+        for (int i = 0; i < 10; i++) {
+            max = Math.max(max,freq[i]);
+
+        }
+        return max;
     }
     public static void main(String[] args) {
         // Q -> Create a HashMap class to stor the following pairs (person,Age) and display them.
@@ -38,6 +58,8 @@ public class INBULT {
 //            System.out.println();
 //        }
 
-
+        int[] arr = {1,1,1,2,2,4,5,8,9};
+//        mostFrequentEl(arr);
+        System.out.println(mostFrequentEl(arr));
     }
 }
