@@ -73,6 +73,8 @@ public class test {
         if(root == null || root.left == null && root.right == null) return 0;
         return 1 +  Math.max(hightOfTree(root.left),hightOfTree(root.right));
     }
+
+
     static void POSTtraverse(Node root) {
         if (root == null) return;
 //        POSTtraverse(root.left);

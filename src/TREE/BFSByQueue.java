@@ -1,5 +1,4 @@
 package TREE;
-
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -11,7 +10,6 @@ public class BFSByQueue {
         int val;
         Node left;
         Node right;
-
         // Constructor
         public Node(int val) {
             this.val = val;
@@ -19,7 +17,6 @@ public class BFSByQueue {
             this.right = null;
         }
     }
-
     static void BFS(Node root){
         Queue<Node> q = new LinkedList<>();
         if(root != null) q.add(root);

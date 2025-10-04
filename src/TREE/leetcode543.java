@@ -42,7 +42,6 @@ public class leetcode543 {
           int right = solve(root.right,result);
           result[0] = Math.max(result[0],left+right);
           return Math.max(left,right) + 1;
-
         }
 
 
