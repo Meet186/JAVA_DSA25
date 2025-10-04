@@ -40,12 +40,10 @@ public class traverse {
         if(root.left == null && root.right == null) return 0;
         return 1 + (Math.max(hightofTreeByLevel(root.left),hightofTreeByLevel(root.right)));
     }
-
     static int minOfTree(Node root){
         if(root == null) return Integer.MAX_VALUE;
         return Math.min(root.val,Math.min(minOfTree(root.left),minOfTree(root.right)));
     }
-
     static int productOfTree(Node root){
         if(root == null) return 1;
         return root.val * productOfTree(root.left) * productOfTree(root.right);

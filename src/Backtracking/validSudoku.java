@@ -33,8 +33,6 @@ public class validSudoku {
                 board[i][j] = '.'; // for compare other value
                 if(!check(board,i,j,ch)) return false;
                 board[i][j] = ch;
-
-
             }
 
         }

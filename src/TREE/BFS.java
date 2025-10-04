@@ -18,7 +18,9 @@ public class BFS { // BFS - BREATH FIRST SERCH -> level order traversel
     static void printNthlevel(Node root, int n ){
         if(root == null) return;
         if(n == 1){
-            System.out.print(root.val + "-");
+          if(root.left != null){
+              System.out.print(root.val);
+          }
             return;
         }
         printNthlevel(root.left,n-1);
@@ -29,7 +31,6 @@ public class BFS { // BFS - BREATH FIRST SERCH -> level order traversel
         for (int i = 1  ; i <= level ; i++) { // TC _ O(N)
             printNthlevel(root,i);
             System.out.println();
-
         }
     }
     public static void main(String[] args) {
