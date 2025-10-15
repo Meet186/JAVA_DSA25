@@ -63,6 +63,7 @@ public class AVL2 {
             }
             return rightRotate(node);
         }
+
         return node;
 
     }
