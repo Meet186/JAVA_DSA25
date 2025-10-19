@@ -1,7 +1,5 @@
 package TREE;
 
-import static java.util.Collections.rotate;
-import static javax.swing.Spring.height;
 
 public class AVL2 {
 
