@@ -5,25 +5,23 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
-
 public class createFile {
     public static void main(String[] args) {
+        File fo = new File("data.txt");
         // create
         try{
-            File fo = new File("data.txt");
             fo.createNewFile();
         } catch (IOException e ){
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
-
         // write
         String filePath = "C:\\Users\\win\\OneDrive\\Desktop\\JAVA_DSA_25\\src\\files\\data.txt";
         try (BufferedWriter fw = new BufferedWriter(new FileWriter(filePath,true))) {
             fw.write("hare krishna ");
             fw.newLine();
-            fw.write("happy");
+            fw.write("कर्मण्येवाधिकारस्ते मा फलेषु कदाचन।");
             fw.newLine();
-            fw.close();
+
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
