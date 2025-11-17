@@ -28,7 +28,7 @@ public class Heap < T extends Comparable<T>> {
     private void upHeap(int index){
         if(index == 0) return;
         int p = parent(index);
-        if(list.get(index).compareTo(list.get(p)) < 0){
+        if (list.get(index).compareTo(list.get(p)) < 0){
             swap(index,p);
             upHeap(p);
         }

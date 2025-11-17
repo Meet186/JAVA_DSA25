@@ -1,6 +1,6 @@
 package KARPRABIN;
 public class KarpRabin { // TC - BEST CASE - O(n + m);
-    // TC - worst - O(n) where n is the textlength which we have to search for pattern
+    // TC - worst - O(n) where n is the text length which we have to search for pattern
 
    private final int PRIME = 101;
    private long calculateHash(String str){
