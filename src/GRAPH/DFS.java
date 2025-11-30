@@ -1,9 +1,6 @@
 package GRAPH;
-
 import java.util.ArrayList;
-
 public class DFS {
-
     static class Edge {
         int src;
         int dest;
@@ -13,7 +10,6 @@ public class DFS {
             this.dest = dest;
         }
     }
-
     static void createGraph(ArrayList<Edge> graph[]){
         for (int i = 0; i < graph.length; i++) {
             graph[i] = new ArrayList<>();
@@ -43,14 +39,12 @@ public class DFS {
         // for 6
         graph[6].add(new Edge(6,5));
     }
-
     static void printVertixNeighbour(ArrayList<Edge> graph[],int vertix){
         for (int i = 0; i < graph[vertix].size(); i++) {
             Edge e = graph[vertix].get(i);
             System.out.print(e.dest + " ");
         }
     }
-
     static void DFS( ArrayList<Edge> graph[],int curr,boolean[] isVisited){
         System.out.print(curr + " ");
         isVisited[curr] = true;
@@ -61,8 +55,6 @@ public class DFS {
             }
         }
     }
-
-
     public static void main(String[] args) {
         int v = 7;
         /*
@@ -74,7 +66,6 @@ public class DFS {
 */
         ArrayList<Edge> graph[] = new ArrayList[v];
         boolean[] isVisited = new boolean[v];
-
         createGraph(graph);
 //        printVertixNeighbour(graph,3);
         DFS(graph,0,isVisited);

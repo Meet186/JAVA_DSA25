@@ -81,6 +81,8 @@ public class practice {
 //            System.out.print(e.dest + " "); // 1 4
 //        }
 //        BFS(graph,6);
-        DFS(graph,0,new boolean[v]);
+//        DFS(graph,0,new boolean[v]);
+        System.out.println(8%4);
+
     }
 }
