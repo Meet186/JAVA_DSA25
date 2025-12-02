@@ -1,11 +1,9 @@
 package GRAPH.ShortestPathAlgo;
-
 import java.util.ArrayList;
 import java.util.PriorityQueue;
-
 public class test {
 
-    static class Edge{
+    static class Edge {
         int src;
         int dest;
         int wt;
@@ -17,24 +15,6 @@ public class test {
         }
     }
 
-    public static void createGraph(ArrayList<Edge>[] graph) {
-        for (int i = 0; i < graph.length; i++) {
-            graph[i] = new ArrayList<>();
-        }
-        graph[0].add(new Edge(0, 1, 2));
-        graph[0].add(new Edge(0, 2, 4));
-
-        graph[1].add(new Edge(1,2,1));
-        graph[1].add(new Edge(1,3,7));
-
-        graph[2].add(new Edge(2,4,3));
-
-        graph[3].add(new Edge(3,5,1));
-
-        graph[4].add(new Edge(4,3,2));
-        graph[4].add(new Edge(4,5,5));
-
-    }
     static class pair implements Comparable<pair> {
         int node;
         int distance;
@@ -43,45 +23,65 @@ public class test {
             this.node = node;
             this.distance = distance;
         }
+
         @Override
-        public int compareTo(pair p2) {
-            return this.distance - p2.distance;
+        public int compareTo(pair o) {
+            return this.distance - o.distance;
         }
     }
-    static void dijkstrasAlgo(ArrayList<Edge>[] graph, int src, int V) {
-            int[] distance = new int[V];
-            boolean[] isVisited = new boolean[V];
-            PriorityQueue<pair> queue = new PriorityQueue<>();
-        for (int i = 0; i < V; i++) {
+
+    public static void dijkstrasAlgo(ArrayList<Edge>[] graph,int src,int V){
+        int[] distance = new int[V];
+        boolean[] isVisited = new boolean[V];
+        PriorityQueue<pair> queue = new PriorityQueue<>();
+        for (int i = 0; i < distance.length; i++) {
             distance[i] = Integer.MAX_VALUE;
         }
         distance[src] = 0;
         queue.offer(new pair(src,0));
         while (!queue.isEmpty()){
             pair curr = queue.poll();
-            for (int i = 0; i < graph[curr.node].size(); i++) {
-                if(!isVisited[curr.node]){
-                    isVisited[curr.node] = true;
+            if(!isVisited[curr.node]){
+                isVisited[curr.node] = true;
+                for (int i = 0; i < graph[curr.node].size(); i++) {
                     Edge e = graph[curr.node].get(i);
                     int u = e.src;
                     int v = e.dest;
-                    // perform relaxtation
+
                     if(distance[u] != Integer.MAX_VALUE && distance[u] + e.wt < distance[v]){
                         distance[v] = distance[u] + e.wt;
                         queue.offer(new pair(v,distance[v]));
+
                     }
+
                 }
-
             }
-        }
 
-        for (int num : distance){
+        }
+        for(int num : distance){
             System.out.print(num + " ");
         }
 
+    }
 
+
+    static void createGraph(ArrayList<Edge>[] graph){
+        for (int i = 0; i < graph.length; i++) {
+            graph[i] = new ArrayList<>();
+        }
+        graph[0].add(new Edge(0,1,1));
+        graph[0].add(new Edge(0,2,3));
+
+        graph[1].add(new Edge(1,3,5));
+
+        graph[2].add(new Edge(2,4,2));
+
+        graph[3].add(new Edge(3,4,0));
+
+        graph[4].add(new Edge(4,5,9));
 
     }
+
     public static void main(String[] args) {
            /*
         (2)        (7)        (1)
