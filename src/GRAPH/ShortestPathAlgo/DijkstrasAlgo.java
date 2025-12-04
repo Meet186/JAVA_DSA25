@@ -69,10 +69,8 @@ public class DijkstrasAlgo {
                         dist[v] = dist[u] + e.wt;
                         pq.add(new pair(v,dist[v]));
                     }
-
                 }
             }
-
         }
         for (int i = 0; i < V; i++) {
             System.out.print(dist[i] + " ");

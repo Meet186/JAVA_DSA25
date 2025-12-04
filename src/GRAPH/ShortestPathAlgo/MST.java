@@ -62,17 +62,14 @@ public class MST { // Prim's Algo
             if(!isVisited[curr.node]){
                 isVisited[curr.node] = true;
                 ans += curr.cost;
-
                 for (int i = 0; i < graph[curr.node].size(); i++) {
                     Edge e = graph[curr.node].get(i);
                     if(!isVisited[e.dest]){
                         pq.offer(new pair(e.dest,e.wt));
                     }
-
                 }
             }
         }
-
         return ans;
     }
 

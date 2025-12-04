@@ -35,7 +35,6 @@ public class BellmanFordAlgo {
             dist[i] = Integer.MAX_VALUE;
         }
         dist[src] = 0;
-
         for(int k=0; k < v-1; k++){
             // perform relextation
             for (int i = 0; i < v; i++) {
@@ -43,12 +42,10 @@ public class BellmanFordAlgo {
                     Edge e = graph[i].get(j);
                     int u = e.src;
                     int V = e.dest;
-
                     if(dist[u] != Integer.MAX_VALUE && dist[u] + e.wt < dist[V]){
                         dist[V] = dist[u] + e.wt;
                     }
                 }
-
             }
         }
         for(int num : dist){
