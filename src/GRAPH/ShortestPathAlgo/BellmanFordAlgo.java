@@ -36,7 +36,7 @@ public class BellmanFordAlgo {
         }
         dist[src] = 0;
         for(int k=0; k < v-1; k++){
-            // perform relextation
+            // perform relextationint[
             for (int i = 0; i < v; i++) {
                 for (int j = 0; j < graph[i].size(); j++) {
                     Edge e = graph[i].get(j);

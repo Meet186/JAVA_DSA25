@@ -84,7 +84,6 @@ public class KosarajusAlgo {
 
         }
     }
-
     public static void main(String[] args) {
         int V = 5;
         ArrayList<Edge>[] graph = new ArrayList[V];

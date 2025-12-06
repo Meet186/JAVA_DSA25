@@ -1,102 +1,126 @@
 package GRAPH;
 
+import GRAPH.ShortestPathAlgo.DijkstrasAlgo;
 import GRAPH.ShortestPathAlgo.KosarajusAlgo;
 import Sorting.StableCountSort;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
+import java.util.*;
 
 public class practice {
 
     static class Edge {
         int src;
         int dest;
+        int wt;
 
-        public Edge(int src, int dest) {
+
+        public Edge(int src, int dest,int wt) {
             this.src = src;
             this.dest = dest;
+            this.wt = wt;
         }
     }
 
-    public static void createGraph(ArrayList<Edge>[] graph){
+    public static void createGraph(ArrayList<Edge>[] graph) {
         for (int i = 0; i < graph.length; i++) {
             graph[i] = new ArrayList<>();
         }
-        graph[0].add(new Edge(0,2));
-        graph[0].add(new Edge(0,3));
+        graph[0].add( new Edge(0, 1, 2));
+        graph[0].add(new Edge(0, 2, 4));
 
-        graph[1].add(new Edge(1,0));
+        graph[1].add(new Edge(1,2,1));
+        graph[1].add(new Edge(1,3,7));
 
-        graph[2].add(new Edge(2,1));
+        graph[2].add(new Edge(2,4,3));
 
-        graph[3].add(new Edge(3,4));
+        graph[3].add(new Edge(3,5,1));
+
+        graph[4].add(new Edge(4,3,2));
+        graph[4].add(new Edge(4,5,5));
     }
 
-    static void kosarajuAlgo(ArrayList<Edge>[] graph,int V){
-        // step 1 -> do Topological Sorting
-        Stack<Integer> st = new Stack<>();
-        boolean[] isViisited = new boolean[V];
+    static class pair implements Comparable<pair> {
+        int node;
+        int distance;
+
+        public pair(int node, int distance) {
+            this.node = node;
+            this.distance = distance;
+        }
+
+        @Override
+        public int compareTo(pair o) {
+            return this.distance - o.distance;
+        }
+    }
+
+    public static int[] dijestraAlgo( ArrayList<Edge>[] graph,int src,int V){
+        boolean[] isVisited = new boolean[V];
+        int[] distance = new int[V];
         for (int i = 0; i < V; i++) {
-            if(!isViisited[i]){
-                topologicalSorting(graph,i,isViisited,st);
+            distance[i] = Integer.MAX_VALUE;
+        }
+        distance[src] = 0;
+        PriorityQueue<pair> pq = new PriorityQueue<>();
+        pq.offer(new pair(src,0));
+
+        while (!pq.isEmpty()){
+            pair curr = pq.poll();
+            if(!isVisited[curr.node]){
+                isVisited[curr.node] = true;
+                for (int i = 0; i < graph[curr.node].size(); i++) {
+                    Edge e = graph[curr.node].get(i);
+                    int u = e.src;
+                    int v = e.dest;
+
+                    if (  distance[u] + e.wt < distance[v]){
+                        distance[v] = distance[u] + e.wt;
+                    }
+                    pq.offer(new pair(v,distance[v]));
+                }
             }
         }
-        // step 2 -> make a transpose graph
-        ArrayList<Edge>[] transpose = new ArrayList[V];
+        return distance;
+    }
+
+    static int[] bellmanForrd( ArrayList<Edge>[] graph,int src,int V){
+        int[] distance = new int[V];
         for (int i = 0; i < V; i++) {
-            isViisited[i] = false;
-            transpose[i] = new ArrayList<>();
+            distance[i] = Integer.MAX_VALUE;
         }
-        for (int i = 0; i < V; i++) {
-            for (int j = 0; j < graph[i].size(); j++) {
-                Edge e = graph[i].get(j);
-                transpose[e.dest].add(new Edge(e.dest,e.src));
+        distance[src] = 0;
+        for(int k=0; k < V-1; k++){
+
+            for (int i = 0; i < V; i++) {
+                for (int j = 0; j < graph[i].size(); j++) {
+                    Edge e = graph[i].get(j);
+                    int u = e.src;
+                    int v = e.dest;
+
+                    if(distance[u] != Integer.MAX_VALUE && distance[u] + e.wt < distance[v]){
+                        distance[v] = distance[u] + e.wt;
+                    }
+
+                }
+
             }
+
+
+
         }
-        // do DFS using Stack elements
-        while (!st.empty()){
-            int curr = st.pop();
-            if(!isViisited[curr]){
-                DFS(transpose,curr,isViisited);
-                System.out.println();
-            }
-        }
+
+        return distance;
+
     }
-    static void DFS(ArrayList<Edge>[] transpose,int curr,boolean[] isVisited){
-        System.out.print(curr + " ");
-        isVisited[curr] = true;
-
-        for (int i = 0; i < transpose[curr].size(); i++) {
-           Edge e = transpose[curr].get(i);
-           if(!isVisited[e.dest]){
-               DFS(transpose, e.dest, isVisited);
-           }
-
-        }
-    }
-
-    static void topologicalSorting( ArrayList<Edge>[] graph,int curr,boolean[] isVisited,Stack<Integer> st){
-        isVisited[curr] = true;
-        for (int i = 0; i < graph[curr].size(); i++) {
-            Edge e = graph[curr].get(i);
-            if(!isVisited[e.dest]){
-                topologicalSorting(graph, e.dest, isVisited, st);
-            }
-        }
-        st.push(curr);
-    }
-
-
-    //
-
     public static void main(String[] args) {
 
-        int V = 5;
+        int V = 6;
         ArrayList<Edge>[] graph = new ArrayList[V];
         createGraph(graph);
-        kosarajuAlgo(graph,V);
+       int[] ans = dijestraAlgo(graph,0,V);
+       int[] ans2 = bellmanForrd(graph,0,V);
+        System.out.println(Arrays.toString(ans2));
+        System.out.println(Arrays.toString(ans));
 
     }
 }
