@@ -20,7 +20,7 @@ public class cyclicSort {
         }
     }
     public static void main(String[] args) {
-        int[] arr = {3,4,-1,1};
+        int[] arr = {3,4,2,1};
         cyclic_Sort(arr);
         System.out.println(Arrays.toString(arr));
     }
