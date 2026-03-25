@@ -51,7 +51,6 @@ public class MST { // Prim's Algo
             return this.cost - o.cost;
         }
     }
-
     public static int MST_PRIMS(ArrayList<Edge>[] graph,int src,int V) { // TC - O(ElogE)
         boolean[] isVisited = new boolean[V];
         int ans = 0;
@@ -72,7 +71,6 @@ public class MST { // Prim's Algo
         }
         return ans;
     }
-
     public static void main(String[] args) {
         int v = 4;
         ArrayList<Edge>[] graph = new ArrayList[v];

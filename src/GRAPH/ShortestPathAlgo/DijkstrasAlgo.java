@@ -50,7 +50,7 @@ public class DijkstrasAlgo {
     public static void dijkstra(ArrayList<Edge>[] graph,int src,int V){ // TC - O(E + ElogV)
         PriorityQueue<pair> pq = new PriorityQueue<>();
         int dist[] = new int[V];
-        for (int i = 0; i < V; i++) {
+        for (int i = 0; i < V; i++) {[]
             if(i != src){
                 dist[i] = Integer.MAX_VALUE;
             }

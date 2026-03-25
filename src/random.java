@@ -5,36 +5,25 @@ import java.util.HashSet;
 import java.util.List;
 
 public class random {
-   static void maze4direction(String p , boolean[][] isvisited,int row,int col){
-       if(row == isvisited.length-1 && col == isvisited[0].length-1){
-           System.out.println(p);
-           return;
-       }
-       if(!isvisited[row][col]) return;
-       isvisited[row][col] = false;
-       if(row < isvisited.length-1){
-           maze4direction("D"+p,isvisited,row+1,col);
-       }
-       if(col < isvisited[0].length-1){
-           maze4direction("R"+p,isvisited,row,col+1);
-       }
-       if(row > 1){
-           maze4direction("L"+p,isvisited,row-1,col);
-       }
-       if(col > 1){
-           maze4direction("U"+p,isvisited,row,col-1);
-       }
-       isvisited[row][col] = true;
-   }
-    public static void main(String[] args) {
-           boolean[][] isVisited = {
-                   {true,true,true},
-                   {true,true,true},
-                   {true,true,true},
 
-           };
-        maze4direction("",isVisited,0,0);
+    public String getHappyString(int n, int k) {
+            String ans = "";
+            List<String> result = new ArrayList<>();
+            solve(ans,result,n);
+            if(result.size() < k) return "";
+            return result.get(k - 1);
     }
-
+    private void  solve(String curr,List<String> result,int n){
+        if(curr.length() == n){
+            result.add(curr);
+            return;
+        }
+        // try all possible combination for happy String abc
+        for (int i = 'a'; i <= 'c' ; i++) {
+            if( !curr.isEmpty() && curr.charAt(i) == curr.charAt(i)) continue; // for lexicographical order
+            curr += i;
+            solve(curr,result,n);
+        }
+    }
 
 }
