@@ -21,6 +21,7 @@ public class leetcode1312 {
         if(i > j) return 0;
         if(i == j) return 1;
 
+
         if(dp[i][j] != -1) return dp[i][j];
 
         if(s.charAt(i) == s.charAt(j)){
