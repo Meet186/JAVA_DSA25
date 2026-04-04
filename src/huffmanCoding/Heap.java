@@ -1,11 +1,11 @@
-package HEAP;
+package huffmanCoding;
+
 
 import java.util.ArrayList;
 
 public class Heap < T extends Comparable<T>> {
-    public boolean size;
     private ArrayList<T>list;
-    public Heap(){
+    Heap(){
         list = new ArrayList<>();
     }
     private void swap(int first,int second){
@@ -63,5 +63,8 @@ public class Heap < T extends Comparable<T>> {
             swap(min,index);
             downHeap(min);
         }
+    }
+    public int size(){
+        return list.size();
     }
 }
