@@ -14,7 +14,6 @@ public class permutation {
             String first = p.substring(0,i);
             String second = p.substring(i,p.length());
             permutation(first + ch + second,up.substring(1));
-
         }
     }
     static List<String> permutation2(String p,String up){

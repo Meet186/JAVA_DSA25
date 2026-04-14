@@ -20,6 +20,8 @@ public class Human implements Cloneable{
 
     }
 
+
+
     public Object clone() throws CloneNotSupportedException{
         // create a shallo copy
         Human twin = (Human) super.clone();
