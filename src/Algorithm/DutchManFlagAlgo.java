@@ -7,9 +7,9 @@ public class DutchManFlagAlgo {
         arr[j] = temp;
     }
     public void sortColors(int[] nums) {
-        int low = 0;
-        int mid = 0;
-        int high = nums.length-1;
+        int low = 0; // 0
+        int mid = 0; // 1
+        int high = nums.length-1; // 2
 
         while(mid <= high){
             if(nums[mid] == 0) {
