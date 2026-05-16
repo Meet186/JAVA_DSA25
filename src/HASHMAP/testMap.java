@@ -6,96 +6,95 @@ public class testMap<k,v> {
     private static final int  DEAFULT_CAPACITY = 16;
     private static final float  LOAD_FACTOR = 0.75f;
     private int n ;
-
-    private class Node{
+    private LinkedList<Node>[] bucket;
+    private class Node {
         k key;
         v value;
-
         public Node(k key, v value) {
             this.key = key;
             this.value = value;
         }
     }
-    private LinkedList<Node> [] Bucket ;
 
     testMap(){
         initBucket(DEAFULT_CAPACITY);
     }
 
     private void initBucket(int deafultCapacity) {
-        Bucket = new LinkedList[DEAFULT_CAPACITY];
-        for (int i = 0; i < Bucket.length; i++) {
-            Bucket[i] = new LinkedList<>();
+        bucket = new LinkedList[DEAFULT_CAPACITY];
+        for (int i = 0; i < bucket.length; i++) {
+            bucket[i] = new LinkedList<>();
         }
     }
 
-    public void put(k key, v value){
-        int bi = getHashFun(key);
-        LinkedList<Node> currentBucket = Bucket[bi];
-        int index = serchInBucket(currentBucket,key);
-        if(index != -1){ //  Already exist in map
-            Node currentNode = currentBucket.get(index);
-            currentNode.value = value; // Update the value
+    private int getHashCode(k key){
+        int code = key.hashCode();
+        return Math.abs(code) % bucket.length; // range of bucket
+    }
+
+    private int searchInBucket(LinkedList<Node> currentBucket, k key) {
+        for (int i = 0; i < currentBucket.size(); i++) {
+            if(currentBucket.get(i).key == key){
+                return i;
+            }
+        }
+        return -1;
+    }
+    private void rehash(){
+        LinkedList<Node>[] oldbucket = bucket;
+        initBucket(oldbucket.length * 2);
+        for(var list : oldbucket){
+            for(var node : list){
+                put(node.key,node.value);
+            }
+        }
+    }
+
+    public void put(k key,v value){
+        int bi = getHashCode(key);
+        LinkedList<Node> currentBucket = bucket[bi];
+        int idx = searchInBucket(currentBucket,key);
+        if(idx != -1){ // already key exist in map
+            currentBucket.get(idx).value = value;
         } else {
             Node newNode = new Node(key, value);
             currentBucket.add(newNode);
             n++;
         }
 
-        if(n >= Bucket.length * LOAD_FACTOR){
+        if(n >= bucket.length * LOAD_FACTOR){
             rehash();
-        }
-
-    }
-
-    private void rehash() {
-        LinkedList<Node> [] oldBucket = Bucket;
-        initBucket(oldBucket.length * 2);
-        n = 0;
-        for(var bucket : oldBucket){
-            for(var node : bucket){
-                put(node.key,node.value);
-            }
         }
     }
 
     public v get(k key){
-        int bi = getHashFun(key);
-        LinkedList<Node> currentBucket = Bucket[bi];
-        int index = serchInBucket(currentBucket,key);
-        if(index != -1){
-          return currentBucket.get(index).value;
+        int bi = getHashCode(key);
+        v val;
+        LinkedList<Node> currentBucket = bucket[bi];
+        int idx = searchInBucket(currentBucket,key);
+        if(idx != -1){ // already key exist in map
+            val = currentBucket.get(idx).value;
         } else {
-            return null;
-
+           return null;
         }
+        return val;
     }
 
     public v remove(k key){
-        int bi = getHashFun(key);
-        LinkedList<Node> currentBucket = Bucket[bi];
-        int index = serchInBucket(currentBucket,key);
-        if(index != -1){
-            v val = currentBucket.get(index).value;
-            currentBucket.remove(index);
+        int bi = getHashCode(key);
+        v val;
+        LinkedList<Node> currentBucket = bucket[bi];
+        int idx = searchInBucket(currentBucket,key);
+        if(idx != -1){ // already key exist in map
+            val = currentBucket.get(idx).value;
+            currentBucket.remove(idx);
             n--;
+        } else {
+            return null;
         }
-        return null;
+        return val;
     }
 
-    private int serchInBucket(LinkedList<Node> currentBucket,k key) {
-        for (int i = 0; i < currentBucket.size(); i++) {
-            if(currentBucket.get(i) == key){
-                return i;
-            }
-        }
-        return -1;
 
-    }
-
-    private int getHashFun(k key) {
-        int value = key.hashCode();
-        return Math.abs(value) % Bucket.length;
-    }
 
 }
