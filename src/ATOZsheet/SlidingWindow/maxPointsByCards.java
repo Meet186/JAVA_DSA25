@@ -6,7 +6,7 @@ public class maxPointsByCards {
         int rsum = 0;
         int maxSum = 0;
 
-        for (int i = 0; i < k-1; i++) {
+        for (int i = 0; i < k; i++) {
             lsum += arr[i];
         }
         maxSum = lsum;
