@@ -181,30 +181,33 @@ public class Array {
 
     // question-13
     // Rotate array left by K positions
-    static void rotateLeftByK(int[] arr, int k) {
-
-        if (arr.length == 0)
-            return;
-
-        k = k % arr.length;
-
-        for (int i = 0; i < k; i++) {
-            rotateLeftByOne(arr);
+      private static void reverse(int[] arr,int i,int j){
+        while(i < j){
+            int temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+            i++;
+            j--;
         }
+    }
+    static void rotateLeftByK(int[] arr, int k) {
+        int n = arr.length;
+        k %= n;
+        reverse(arr, 0, k - 1);
+        reverse(arr, k, n - 1);
+        reverse(arr, 0, n - 1);
     }
 
     // question-14
     // Rotate array right by K positions
     static void rotateRightByK(int[] arr, int k) {
 
-        if (arr.length == 0)
-            return;
+        int n = arr.length;
 
         k = k % arr.length;
-
-        for (int i = 0; i < k; i++) {
-            rotateRightByOne(arr);
-        }
+        reverse(arr, 0, n - 1);
+        reverse(arr, 0, k - 1);
+        reverse(arr, k, n - 1);
     }
     // PHASE_4 : REARRANGEMENT / FILTERING
     // question-15
